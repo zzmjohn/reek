@@ -118,4 +118,10 @@ EOS
       @warning.lines.should == [1]
     end
   end
+
+  context 'class methods' do
+    it 'do not report UtilityFunction' do
+      'class Omg; class << self; def simple(a,b,c) a.to_s; b.to_s; c.to_s; end; end; end'.should_not reek_of(:UtilityFunction)
+    end
+  end
 end
