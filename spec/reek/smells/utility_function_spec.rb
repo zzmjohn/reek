@@ -119,9 +119,27 @@ EOS
     end
   end
 
-  context 'class methods' do
-    it 'do not report UtilityFunction' do
+  context 'Singleton methods' do
+    it 'for classes with `class << self` notation should not report UtilityFunction' do
       'class Omg; class << self; def simple(a,b,c) a.to_s; b.to_s; c.to_s; end; end; end'.should_not reek_of(:UtilityFunction)
+    end
+
+    it 'for classes with `self.` notation should not report UtilityFunction' do
+      'class Omg; def self.simple(a,b,c) a.to_s; b.to_s; c.to_s; end; end'.should_not reek_of(:UtilityFunction)
+    end
+
+    it 'for modules with `class << self` notation should not report UtilityFunction' do
+      'module Omg; class << self; def self.simple(a,b,c) a.to_s; b.to_s; c.to_s; end; end; end'.should_not reek_of(:UtilityFunction)
+    end
+
+    it 'for modules with `self.` notation should not report UtilityFunction' do
+      'module Omg; def self.simple(a,b,c) a.to_s; b.to_s; c.to_s; end; end'.should_not reek_of(:UtilityFunction)
+    end
+  end
+
+  context 'Module methods' do
+    it 'should not report UtilityFunction' do
+      'module Omg def simple(a, b, c) a.to_s; b.to_s; c.to_s end end'.should_not reek_of(:UtilityFunction)
     end
   end
 end
