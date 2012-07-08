@@ -136,10 +136,4 @@ EOS
       'module Omg; def self.simple(a,b,c) a.to_s; b.to_s; c.to_s; end; end'.should_not reek_of(:UtilityFunction)
     end
   end
-
-  context 'Module methods' do
-    it 'should not report UtilityFunction' do
-      'module Omg def simple(a, b, c) a.to_s; b.to_s; c.to_s end end'.should_not reek_of(:UtilityFunction)
-    end
-  end
 end
